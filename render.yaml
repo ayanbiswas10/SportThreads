@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: sportthreads-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+  - type: static
+    name: sportthreads-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/build
+    envVars:
+      - key: NODE_ENV
+        value: production
