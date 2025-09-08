@@ -8,7 +8,10 @@ services:
       - key: NODE_ENV
         value: production
 
-  - type: web
+  - type: static
     name: sportthreads-frontend
     buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/build
+    publishPath: frontend/build
+    staticPublishPath: frontend/build
+    env: static
+    route: /
