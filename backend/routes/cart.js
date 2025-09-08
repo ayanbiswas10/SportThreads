@@ -12,6 +12,11 @@ router.get('/:userId', async (req, res) => {
       cart = new Cart({ user: req.params.userId, items: [] });
       await cart.save();
     }
+    
+    // Filter out items where the referenced product no longer exists
+    cart.items = cart.items.filter(item => item.item != null);
+    await cart.save();
+    
     res.json(cart);
   } catch (err) {
     res.status(500).json({ message: err.message });
