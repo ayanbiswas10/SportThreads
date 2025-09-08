@@ -47,7 +47,7 @@ const Home = () => {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const userId = payload.id;
-      const response = await fetch(`http://localhost:5000/api/cart/${userId}/add`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/cart/${userId}/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const Home = () => {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const userId = payload.id;
-      const response = await fetch(`http://localhost:5000/api/cart/${userId}/remove`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/cart/${userId}/remove`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const Home = () => {
 
       // For quantity updates, we need to remove and re-add with new quantity
       // First remove
-      await fetch(`http://localhost:5000/api/cart/${userId}/remove`, {
+      await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/cart/${userId}/remove`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const Home = () => {
       });
 
       // Then add with new quantity
-      const response = await fetch(`http://localhost:5000/api/cart/${userId}/add`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/cart/${userId}/add`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
