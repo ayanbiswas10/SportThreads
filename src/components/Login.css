@@ -1,0 +1,111 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #0f172a; /* dark blue background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-box {
+  background: #1e293b; /* slightly lighter dark */
+  padding: 2rem;
+  border-radius: 8px;
+  width: 350px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  color: #cbd5e1; /* light text */
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logo-icon {
+  font-size: 2.5rem;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.25rem;
+}
+
+.logo-section h1 {
+  color: #14b8a6;
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+.logo-section p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin-top: 0.25rem;
+}
+
+.toggle-buttons {
+  display: flex;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0f172a;
+}
+
+.toggle-buttons button {
+  flex: 1;
+  padding: 0.5rem 0;
+  border: none;
+  background: #0f172a;
+  color: #64748b;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.toggle-buttons button.active {
+  background: #10b981;
+  color: white;
+}
+
+.toggle-buttons button:hover:not(.active) {
+  background: #1e293b;
+}
+
+.login-form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  background: #0f172a;
+  color: white;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #64748b;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 0.6rem 0;
+  background: linear-gradient(90deg, #10b981, #3b82f6);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-submit:hover {
+  background: linear-gradient(90deg, #3b82f6, #10b981);
+}
