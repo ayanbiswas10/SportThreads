@@ -7,12 +7,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-
-  - type: web
-    name: sportthreads-frontend
-    env: node
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: serve -s frontend/build
-    envVars:
-      - key: NODE_ENV
-        value: production
