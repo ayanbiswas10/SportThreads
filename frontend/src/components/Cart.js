@@ -35,8 +35,12 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity, onClose, onPlaceOrder
   const sortedCartItems = [...cartItems];
 
   // Calculate subtotal and total items
-  const totalItems = sortedCartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
-  const subtotal = sortedCartItems.reduce((sum, item) => sum + ((item.quantity || 1) * (item.item.price || 0)), 0);
+  const totalItems = sortedCartItems.reduce((sum, item) => sum + (item?.quantity || 1), 0);
+  const subtotal = sortedCartItems.reduce((sum, item) => {
+    const quantity = item?.quantity || 1;
+    const price = item?.item?.price || 0;
+    return sum + (quantity * price);
+  }, 0);
 
   return (
     <div className="cart-container">
@@ -49,20 +53,29 @@ const Cart = ({ cartItems, onRemoveItem, onUpdateQuantity, onClose, onPlaceOrder
       ) : (
         <>
           <div className="cart-items">
-            {sortedCartItems.map(cartItem => (
-              <div key={cartItem.item._id} className="cart-item">
-                <img src={getImageSource(cartItem.item.imageUrl)} alt={cartItem.item.name} />
-                <div className="item-details">
-                  <h3>{cartItem.item.name}</h3>
-                  <p>{cartItem.item.team}</p>
-                  <p>Price: ₹{cartItem.item.price ? cartItem.item.price.toFixed(2) : '0.00'}</p>
+            {sortedCartItems.map(cartItem => {
+              if (!cartItem?.item) return null; // Skip rendering if item is undefined
+              return (
+                <div key={cartItem.item._id || 'temp-id'} className="cart-item">
+                  <img src={getImageSource(cartItem.item.imageUrl)} alt={cartItem.item.name || 'Product'} />
+                  <div className="item-details">
+                    <h3>{cartItem.item.name || 'Unnamed Product'}</h3>
+                    <p>{cartItem.item.team || 'Team not specified'}</p>
+                    <p>Price: ₹{cartItem.item.price ? cartItem.item.price.toFixed(2) : '0.00'}</p>
                   <div className="quantity-control">
-                    <label htmlFor={`quantity-${cartItem.item._id}`}>Quantity:</label>
-                    <button className="quantity-btn minus-btn" onClick={() => handleQuantityChange(cartItem.item._id, (cartItem.quantity || 1) - 1)} disabled={(cartItem.quantity || 1) <= 1}>−</button>
+                    <label htmlFor={`quantity-${cartItem.item._id || 'temp'}`}>Quantity:</label>
+                    <button 
+                      className="quantity-btn minus-btn" 
+                      onClick={() => cartItem.item._id && handleQuantityChange(cartItem.item._id, (cartItem.quantity || 1) - 1)} 
+                      disabled={(cartItem.quantity || 1) <= 1}>−</button>
                     <span className="quantity-number">{cartItem.quantity || 1}</span>
-                    <button className="quantity-btn plus-btn" onClick={() => handleQuantityChange(cartItem.item._id, (cartItem.quantity || 1) + 1)}>+</button>
+                    <button 
+                      className="quantity-btn plus-btn" 
+                      onClick={() => cartItem.item._id && handleQuantityChange(cartItem.item._id, (cartItem.quantity || 1) + 1)}>+</button>
                   </div>
-                  <button className="remove-btn" onClick={() => onRemoveItem(cartItem.item._id)}>Remove</button>
+                  <button 
+                    className="remove-btn" 
+                    onClick={() => cartItem.item._id && onRemoveItem(cartItem.item._id)}>Remove</button>
                 </div>
               </div>
             ))}
